@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz San Valentín</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffccdc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #hello-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .game-button {
+            padding: 15px 25px;
+            font-size: 18px;
+            background-color: #e63946;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background 0.3s;
+        }
+        .game-button:hover {
+            background-color: #d62839;
+        }
+        #main-content {
+            display: none;
+            text-align: center;
+        }
+        .photo-container {
+            position: relative;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .photo-container img {
+            width: 100%;
+            border-radius: 10px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .photo-container img.active {
+            opacity: 1;
+            position: relative;
+        }
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            font-size: 20px;
+            border-radius: 50%;
+        }
+        .prev { left: 10px; }
+        .next { right: 10px; }
+    </style>
+</head>
+<body>
+    <div id="hello-container">
+        <img src="minion.jpg" alt="Minion" width="200">
+        <h2>Hola 💛</h2>
+        <button class="game-button" onclick="startGame()">Continuar</button>
+    </div>
+
+    <div id="main-content">
+        <h1>Te amo a ti, Bella, y cada momento contigo 💕</h1>
+        <h2>Happy Valentine's Day</h2>
+        <div class="photo-container">
+            <button class="prev" onclick="changePhoto(-1)">&#10094;</button>
+            <img src="foto1.jpg" alt="Foto 1" class="photo active">
+            <img src="foto2.jpg" alt="Foto 2" class="photo">
+            <img src="foto3.jpg" alt="Foto 3" class="photo">
+            <img src="foto4.jpg" alt="Foto 4" class="photo">
+            <button class="next" onclick="changePhoto(1)">&#10095;</button>
+        </div>
+    </div>
+
+    <script>
+        function startGame() {
+            document.getElementById("hello-container").style.display = "none";
+            document.getElementById("main-content").style.display = "block";
+        }
+
+        let currentPhotoIndex = 0;
+        function changePhoto(direction) {
+            const photos = document.querySelectorAll('.photo');
+            photos[currentPhotoIndex].classList.remove('active');
+            currentPhotoIndex = (currentPhotoIndex + direction + photos.length) % photos.length;
+            photos[currentPhotoIndex].classList.add('active');
+        }
+    </script>
+</body>
+</html>
